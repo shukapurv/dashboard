@@ -60,14 +60,12 @@ export default function Info() {
     ) {
       // Store data in local storage
       localStorage.setItem('userData', JSON.stringify(formData));
-      console.log('Form submitted successfully');
       handleShowToast(`Form submitted successfully`);
 
       // Route to /dashboard
       navigate('/dashboard');
     } else {
       handleShowToast(`Error submitting`);
-      // console.log('Form validation failed');
     }
 
   };
@@ -143,7 +141,7 @@ export default function Info() {
                   required
                   fullWidth
                   name="phone"
-                  label="Phone Number"
+                  label="Phone Number (10 digits phone number without code)"
                   onChange={handleInputChange}
                   id="phone"
                 />

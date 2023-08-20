@@ -11,10 +11,8 @@ export function isValidLastName(lastName: string): boolean {
 export function isValidPhoneNumber(phoneNumber: string): boolean {
   try {
     const parsedPhoneNumber =  parsePhoneNumber('+91'+ phoneNumber);
-    console.log(parsedPhoneNumber);
     return parsedPhoneNumber?.isValid() || false;
   } catch (error) {
-    console.error(error);
     return false;
   }
 }
