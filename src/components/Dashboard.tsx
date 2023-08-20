@@ -1,14 +1,13 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
-import {DataItem, Department, Props} from '../interfaces/dashboard';
+import { DataItem, Department, Props } from '../interfaces/dashboard';
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Checkbox,
   FormControlLabel,
-  Typography,
   Button,
   IconButton,
 } from '@mui/material';
@@ -61,13 +60,14 @@ function Dashboard({ departments }: Props) {
         ) {
           updatedState[department.department] = true;
         } else {
-          updatedState[department.department] = false;
+          if (department) {
+            updatedState[department.department] = false;
+          }
         }
 
         return updatedState;
       });
     };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,10 +95,13 @@ function Dashboard({ departments }: Props) {
         {departments.map((dept, index) => (
           <Accordion key={index} expanded={expanded[dept.department] || false}>
             <AccordionSummary expandIcon={<ExpandMore />}>
-              <IconButton onClick={()=>toggleExpansion(dept.department)}>
+              <IconButton onClick={() => toggleExpansion(dept.department)}>
                 <ArrowDropDown />
               </IconButton>
-              <FormControlLabel control={<Button>{dept.department}</Button>} label=''/>
+              <FormControlLabel
+                control={<Button>{dept.department}</Button>}
+                label=""
+              />
               <FormControlLabel
                 control={
                   <Checkbox
@@ -106,7 +109,7 @@ function Dashboard({ departments }: Props) {
                     onChange={handleDepartmentChange(dept)}
                   />
                 }
-                label=''
+                label=""
               />
             </AccordionSummary>
             <AccordionDetails>

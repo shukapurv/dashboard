@@ -1,7 +1,7 @@
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useToast } from '../context/ToastContext';
 
-function RouteGuard({ element: Element, ...props }: any) {
+function RouteGuard({ ...props }: any) {
   const userInfo = localStorage.getItem('userData');
   const { showToast } = useToast();
   if (!userInfo) {

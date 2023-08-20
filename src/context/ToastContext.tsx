@@ -6,6 +6,10 @@ interface Toast {
   open: boolean;
 }
 
+interface ContextProps {
+    children: React.ReactNode;
+}
+
 interface ToastContextValue {
   showToast: (message: string) => void;
   hideToast: () => void;
@@ -13,7 +17,7 @@ interface ToastContextValue {
 
 const ToastContext = createContext<ToastContextValue | undefined>(undefined);
 
-export const ToastProvider: React.FC = ({ children }) => {
+export const ToastProvider: React.FC<ContextProps> = (props: ContextProps) => {
   const [toast, setToast] = useState<Toast>({ message: '', open: false });
 
   const showToast = (message: string) => {
@@ -26,7 +30,7 @@ export const ToastProvider: React.FC = ({ children }) => {
 
   return (
     <ToastContext.Provider value={{ showToast, hideToast }}>
-      {children}
+      {props.children}
       <Snackbar
         open={toast.open}
         autoHideDuration={2000}
